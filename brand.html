@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Edison Finance — Brand Mark</title>
+  <link rel="stylesheet" href="tokens.css" />
+  <link rel="stylesheet" href="styles-logo.css" />
+  <style>
+    body { background: var(--bg-2); padding: 56px 24px; }
+    .wrap { max-width: 1080px; margin: 0 auto; }
+    .meta { font-size: 13px; color: var(--fg-3); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
+    h1 { margin: 8px 0 16px; }
+    .lede { max-width: 640px; color: var(--fg-3); font-size: 17px; }
+    .section-h { margin: 56px 0 16px; font-size: 14px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brand-700); }
+    .marks-row { display: flex; gap: 32px; align-items: center; flex-wrap: wrap; padding: 32px; background: var(--white); border: 1px solid var(--ink-100); border-radius: var(--r-lg); }
+    .marks-row .ed-mark { transition: transform 200ms var(--ease); }
+    .marks-row .ed-mark:hover { transform: scale(1.05); }
+    .mark-cap { font-size: 11px; color: var(--fg-3); text-align: center; margin-top: 8px; letter-spacing: 0.04em; }
+    .mark-block { display: flex; flex-direction: column; align-items: center; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="meta">Brand mark · v1</div>
+    <h1 class="display-md">Edison Finance — visual identity</h1>
+    <p class="lede">A geometric "E" monogram with a gold filament dot — a quiet nod to Edison (illumination, ideas) without literal lightbulbs. Set in an emerald disc with a hairline gold rim. Built on a 64-unit grid for crisp scaling from favicon to building signage.</p>
+
+    <div class="section-h">Primary lockup</div>
+    <div class="logo-showcase">
+      <div class="logo-tile logo-tile-grid">
+        <span class="logo-tile-label">On light</span>
+        <div id="m1"></div>
+      </div>
+      <div class="logo-tile logo-tile-dark">
+        <span class="logo-tile-label">On emerald</span>
+        <div id="m2"></div>
+      </div>
+    </div>
+
+    <div class="section-h">Mark at every scale</div>
+    <div class="marks-row">
+      <div class="mark-block"><div id="s16"></div><div class="mark-cap">16 · favicon</div></div>
+      <div class="mark-block"><div id="s24"></div><div class="mark-cap">24 · inline</div></div>
+      <div class="mark-block"><div id="s40"></div><div class="mark-cap">40 · nav</div></div>
+      <div class="mark-block"><div id="s64"></div><div class="mark-cap">64 · card</div></div>
+      <div class="mark-block"><div id="s96"></div><div class="mark-cap">96 · hero</div></div>
+      <div class="mark-block"><div id="s144"></div><div class="mark-cap">144 · signage</div></div>
+    </div>
+
+    <div class="section-h">Stacked / compact</div>
+    <div class="logo-showcase">
+      <div class="logo-tile">
+        <span class="logo-tile-label">Compact</span>
+        <div id="m3"></div>
+      </div>
+      <div class="logo-tile logo-tile-cream">
+        <span class="logo-tile-label">Large</span>
+        <div id="m4"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script type="text/babel" src="logo.jsx"></script>
+  <script type="text/babel">
+    ReactDOM.createRoot(document.getElementById('m1')).render(<EdisonLockup size="lg" variant="light" />);
+    ReactDOM.createRoot(document.getElementById('m2')).render(<EdisonLockup size="lg" variant="dark" />);
+    ReactDOM.createRoot(document.getElementById('m3')).render(<EdisonLockup size="sm" variant="light" />);
+    ReactDOM.createRoot(document.getElementById('m4')).render(<EdisonLockup size="lg" variant="light" />);
+    [['s16',16],['s24',24],['s40',40],['s64',64],['s96',96],['s144',144]].forEach(([id,s]) => {
+      ReactDOM.createRoot(document.getElementById(id)).render(<EdisonMark size={s} variant="light" />);
+    });
+  </script>
+</body>
+</html>
