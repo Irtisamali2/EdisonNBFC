@@ -1,9 +1,9 @@
 {
   "version": 2,
-  "buildCommand": "npm --prefix client install && npm --prefix client run build",
+  "buildCommand": "npm run build",
   "outputDirectory": "client/dist",
   "functions": {
-    "api/*.mjs": {
+    "api/*.js": {
       "runtime": "nodejs20.x"
     }
   },
