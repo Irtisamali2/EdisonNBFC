@@ -15,7 +15,7 @@ const NAV_LINKS = [
 export default function TopNav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -35,8 +35,13 @@ export default function TopNav() {
 
         <nav className="nav-links" aria-label="Main navigation">
           {NAV_LINKS.map(([label, href]) => {
-            const base = href.split('#')[0];
-            const isActive = base === pathname;
+            const [base, fragment] = href.split('#');
+            let isActive;
+            if (fragment) {
+              isActive = pathname === base && hash === `#${fragment}`;
+            } else {
+              isActive = pathname === base && !hash;
+            }
             return (
               <Link key={href} to={href} className={isActive ? 'nav-active' : ''}>
                 {label}
