@@ -25,7 +25,7 @@ export default function Impact({ noHead = false }) {
             <p className="impact-lede">Edison Finance aims to bridge the financial gap for underserved segments of Pakistan&apos;s economy. Our impact is articulated by intent today, and will be measured by outcomes as our portfolio grows.</p>
           </div>
         )}
-        <div className="aim-grid">
+        <div className="aim-grid" data-stagger>
           {AIMS.map((a, i) => (
             <div className="aim-card" key={i}>
               <span className="aim-ico"><Icon name={a.ic} size={22} /></span>
@@ -38,7 +38,7 @@ export default function Impact({ noHead = false }) {
           <span className="eyebrow eyebrow-light">Focus areas</span>
           <h3 className="impact-h-sub">Where our capital lands first.</h3>
         </div>
-        <div className="focus-grid">
+        <div className="focus-grid" data-stagger>
           {FOCUS.map((f, i) => (
             <div className="focus-card" key={i}>
               <span className="focus-ico"><Icon name={f.ic} size={22} /></span>

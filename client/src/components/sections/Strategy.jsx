@@ -30,7 +30,7 @@ export default function Strategy({ noHead = false }) {
         <div className="strategy-grid">
           <div className="strategy-left">
             <h3 className="h3-section">Strategic objectives</h3>
-            <div className="goals">
+            <div className="goals" data-stagger>
               {GOALS.map((g, i) => (
                 <div className="goal" key={i}>
                   <span className="goal-num mono">{String(i + 1).padStart(2, '0')}</span>

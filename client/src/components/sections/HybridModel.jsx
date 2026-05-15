@@ -8,7 +8,7 @@ export default function HybridModel() {
           <span className="eyebrow">Operational model</span>
           <h2 className="display-md">A hybrid lending architecture — two compliant tracks, one institution.</h2>
         </div>
-        <div className="hybrid-grid">
+        <div className="hybrid-grid" data-stagger>
           <div className="hybrid-col hybrid-shariah">
             <div className="hybrid-col-head">
               <Icon name="moon" size={28} /><h3>Shariah-compliant</h3>

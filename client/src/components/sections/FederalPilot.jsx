@@ -28,7 +28,7 @@ export default function FederalPilot() {
         </div>
 
         <div className="federal-right">
-          <div className="commit-card">
+          <div className="commit-card" data-reveal>
             <div className="commit-head">
               <span className="commit-stamp">Commitment</span>
               <span className="commit-date mono">Jan 2026</span>

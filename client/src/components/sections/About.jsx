@@ -24,7 +24,7 @@ export default function About({ noHead = false }) {
             risk standards Pakistan&apos;s financial sector demands. We are commercially viable and
             socially anchored — built to last.
           </p>
-          <div className="about-stats">
+          <div className="about-stats" data-stagger>
             <div>
               <div className="stat-num">Jan 2026</div>
               <div className="stat-lbl">Incorporated under Companies Act, 2017</div>
@@ -38,7 +38,7 @@ export default function About({ noHead = false }) {
               <div className="stat-lbl">Sponsor shareholders · majority resident</div>
             </div>
           </div>
-          <div className="vm-grid">
+          <div className="vm-grid" data-stagger>
             <div className="vm-card">
               <div className="vm-tag">Vision</div>
               <p>Provide responsible, inclusive, and ethical financial services that empower micro-entrepreneurs to achieve economic self-reliance and socio-economic uplift.</p>

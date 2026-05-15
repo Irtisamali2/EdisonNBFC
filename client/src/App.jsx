@@ -20,6 +20,25 @@ function ScrollToTop() {
 
 function AnimatedRoutes() {
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    const targets = document.querySelectorAll('[data-reveal], [data-stagger]');
+    if (!targets.length) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            observer.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+    targets.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [pathname]);
+
   return (
     <div key={pathname} className="page-enter">
       <Routes>

@@ -36,9 +36,9 @@ export default function Products({ noHead = false }) {
           <div className="tabs-row"><Tabs tab={tab} setTab={setTab} /></div>
         )}
 
-        <div className="products-grid">
+        <div key={tab} className="products-grid">
           {list.map((p, i) => (
-            <article className="product-card card card-interactive" key={tab + i}>
+            <article className="product-card card card-interactive" key={i}>
               <div className="product-top">
                 <span className="product-ico"><Icon name={p.ic} size={22} /></span>
                 <span className={`product-mode ${p.mode === 'Planned' ? 'product-mode-soft' : ''}`}>{p.mode}</span>

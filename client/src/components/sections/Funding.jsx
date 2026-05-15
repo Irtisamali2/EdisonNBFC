@@ -19,7 +19,7 @@ export default function Funding() {
             leverage, healthy liquidity buffers, and regulatory compliance.
           </p>
         </div>
-        <div className="funding-channels">
+        <div className="funding-channels" data-stagger>
           {CHANNELS.map((c, i) => (
             <div className="fund-card" key={i}>
               <span className="fund-ico"><Icon name={c.ic} size={22} /></span>

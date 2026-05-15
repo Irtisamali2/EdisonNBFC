@@ -14,7 +14,7 @@ export default function StrategicPositioning() {
           <h2 className="display-md sp-h">Aiming for financial inclusion, social empowerment, and sustainable growth.</h2>
         </div>
         <div className="sp-right">
-          <ul className="sp-aims">
+          <ul className="sp-aims" data-stagger>
             {AIMS.map((a, i) => (
               <li key={i}><span className="sp-num mono">{String(i + 1).padStart(2, '0')}</span>{a}</li>
             ))}
