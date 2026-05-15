@@ -2,6 +2,7 @@ const AIMS = [
   'Promote financial inclusion',
   'Drive social empowerment',
   'Enable sustainable economic growth',
+  'Foster micro-entrepreneurship',
 ];
 
 export default function StrategicPositioning() {

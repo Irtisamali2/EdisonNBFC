@@ -7,8 +7,6 @@ const ITEMS = [
   { l: 'Incorporated on',     v: '14 January 2026',       d: 'Registered office at Islamabad.' },
   { l: 'Commissioner order',  v: '07 January 2026',       d: 'Permission under rule 4(2) of the NBFCs Establishment and Regulations Rules, 2003.' },
   { l: 'License window',      v: '6 months',              d: 'License must be obtained by 7 July 2026 (inclusive).' },
-  { l: 'Paid-up share capital', v: 'PKR 50,000,000',      d: 'Minimum statutory paid-up share capital to be deposited and verified to SECP.' },
-  { l: 'License fee',         v: 'PKR 760,000',           d: 'Non-refundable, payable at the time of application submission.' },
 ];
 
 export default function RegulatoryStatus() {

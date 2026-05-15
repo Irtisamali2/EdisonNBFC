@@ -1,10 +1,9 @@
 import Icon from '../common/Icon.jsx';
 
 const CHANNELS = [
-  { ic: 'people',   t: 'Sponsor equity',            d: 'Paid-up shareholder capital from incorporators — the foundation of our balance sheet.' },
-  { ic: 'building', t: 'Institutional financing',   d: 'Term financing from banks and development finance institutions, both local and international.' },
+  { ic: 'people',   t: 'Sponsor equity',             d: 'Paid-up shareholder capital from incorporators — the foundation of our balance sheet.' },
+  { ic: 'building', t: 'Institutional financing',    d: 'Term financing from banks and development finance institutions, both local and international.' },
   { ic: 'moon',     t: 'Shariah-compliant channels', d: 'Sukuk, mudarabah, and other Islamic capital markets instruments aligned to our Shariah governance.' },
-  { ic: 'shield',   t: 'Federal pilot capital',     d: 'PKR 2 billion commitment from the Federal Government — deployed under approved SOPs, post-license.' },
 ];
 
 export default function Funding() {
@@ -32,7 +31,7 @@ export default function Funding() {
         </div>
         <div className="funding-foot">
           <Icon name="scale" size={18} />
-          <span><strong>Capital adequacy —</strong> PKR 50 million minimum paid-up share capital, deposited in a designated bank account and verified to the SECP Licensing Department.</span>
+          <span><strong>Capital adequacy —</strong> Statutory minimum paid-up share capital maintained and verified with the SECP Licensing Department.</span>
         </div>
       </div>
     </section>

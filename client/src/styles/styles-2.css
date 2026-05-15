@@ -142,7 +142,7 @@
 /* ---- Funding (channels, no fake percentages) ----------------- */
 .funding-head { max-width: 780px; margin-bottom: 56px; }
 .funding-lede { margin-top: 16px; }
-.funding-channels { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.funding-channels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .fund-card { background: var(--white); border: 1px solid var(--ink-100); border-radius: var(--r-lg); padding: 28px; transition: all var(--t-base) var(--ease); position: relative; display: flex; flex-direction: column; gap: 8px; }
 .fund-card:hover { border-color: var(--brand-300); box-shadow: var(--shadow-md); transform: translateY(-2px); }
 .fund-ico { width: 44px; height: 44px; border-radius: var(--r-md); background: var(--brand-50); color: var(--brand-700); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 8px; }
@@ -253,7 +253,7 @@ input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border-radius
   .display-lg { font-size: 56px; }
   .display-md { font-size: 40px; }
   .hero-inner, .about-grid, .strategy-grid, .federal-grid, .funding-grid, .calc-grid, .apply-grid, .contact-grid, .foot-row { grid-template-columns: 1fr; gap: 48px; }
-  .hero-visual { display: none; }
+  .hero-visual { max-width: 360px; width: 100%; margin: 0 auto; aspect-ratio: 1 / 1; justify-self: center; }
   .strip-row { grid-template-columns: repeat(3, 1fr); }
   .strip-item { border-right: none; }
   .impact-stats, .focus-grid, .hybrid-foot { grid-template-columns: repeat(2, 1fr); }
@@ -270,6 +270,10 @@ input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border-radius
   .display-md { font-size: 30px; }
   h2 { font-size: 24px; }
   .hero-inner { padding: 32px var(--gutter) 48px; min-height: auto; }
+  .hero-visual { max-width: 260px; margin-top: -8px; overflow: hidden; }
+  .orb-chips { display: none; }
+  .hero-ctas { flex-wrap: nowrap; gap: 10px; }
+  .hero-ctas .btn { font-size: 13px; padding: 11px 14px; flex: 1; justify-content: center; min-width: 0; }
   .hero-trust { flex-wrap: wrap; gap: 16px; }
   .trust-divider { display: none; }
   .strip-row { grid-template-columns: 1fr; }

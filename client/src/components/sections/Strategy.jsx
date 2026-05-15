@@ -1,12 +1,13 @@
 import Icon from '../common/Icon.jsx';
 
 const GOALS = [
-  { t: 'Sectoral insight',     d: 'Products aligned with the financial & social needs of micro and small entrepreneurs.' },
-  { t: 'Digital outreach',     d: 'Tech-driven origination and servicing to reduce cost and expand reach.' },
-  { t: 'Ethical financing',    d: 'Responsible, Shariah-aligned products inside a commercially viable structure.' },
-  { t: 'Funding partnerships', d: 'Local and international institutions for diversified fund mobilization.' },
-  { t: 'Strong governance',    d: 'Risk management and compliance frameworks aligned to SECP standards.' },
-  { t: 'Phased product breadth', d: 'Begin with microcredit; expand into savings, insurance, and literacy.' },
+  { t: 'Sectoral insight',       d: 'Products aligned with the financial and social needs of micro and small entrepreneurs.' },
+  { t: 'Digital outreach',       d: 'Tech-driven origination and servicing to reduce cost and expand reach.' },
+  { t: 'Ethical financing',      d: 'Responsible, Shariah-aligned products inside a commercially viable structure.' },
+  { t: 'Funding partnerships',   d: 'Local and international institutions for diversified fund mobilization.' },
+  { t: 'Strong governance',      d: 'Risk management and compliance frameworks aligned to SECP standards.' },
+  { t: 'Phased product breadth', d: 'Begin with microcredit; expand into savings, insurance, and literacy programs.' },
+  { t: 'Financial literacy',     d: 'Equip borrowers with knowledge to grow sustainably and reduce dependency on informal credit.' },
 ];
 
 const TARGETS = [

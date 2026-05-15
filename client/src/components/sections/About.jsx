@@ -26,12 +26,12 @@ export default function About({ noHead = false }) {
           </p>
           <div className="about-stats">
             <div>
-              <div className="stat-num">PKR 50M</div>
-              <div className="stat-lbl">Minimum paid-up capital · regulatory</div>
+              <div className="stat-num">Jan 2026</div>
+              <div className="stat-lbl">Incorporated under Companies Act, 2017</div>
             </div>
             <div>
-              <div className="stat-num">6 mo</div>
-              <div className="stat-lbl">License window · expected by Jul 2026</div>
+              <div className="stat-num">Jul 2026</div>
+              <div className="stat-lbl">Expected SECP NBFC license</div>
             </div>
             <div>
               <div className="stat-num">3</div>
@@ -47,8 +47,9 @@ export default function About({ noHead = false }) {
               <div className="vm-tag vm-tag-dark">Mission</div>
               <ul>
                 <li>Focus on micro-entrepreneurs from urban &amp; low-income communities</li>
-                <li>Unlock potential through accessible, affordable, ethically structured finance</li>
-                <li>Offer both Shariah-compliant and conventional solutions</li>
+                <li>Unlock their potential through accessible, affordable, and ethically structured financial solutions</li>
+                <li>Offer both Shariah-compliant and conventional microfinance products</li>
+                <li>Promote financial literacy and socio-economic uplift of underserved segments</li>
               </ul>
             </div>
           </div>

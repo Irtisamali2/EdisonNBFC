@@ -1,5 +1,5 @@
 const express = require('express');
-const { saveApplication } = require('../../lib/forms');
+const { saveApplication } = require('../lib/forms');
 
 const router = express.Router();
 
