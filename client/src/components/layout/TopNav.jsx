@@ -57,7 +57,7 @@ export default function TopNav() {
         </div>
 
         <button
-          className="nav-burger"
+          className={`nav-burger${open ? ' nav-burger-open' : ''}`}
           onClick={() => setOpen(!open)}
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
@@ -66,16 +66,20 @@ export default function TopNav() {
         </button>
       </div>
 
-      {open && (
-        <nav className="nav-mobile" aria-label="Mobile navigation">
+      <nav
+        className={`nav-mobile${open ? ' nav-mobile-open' : ''}`}
+        aria-hidden={!open}
+        aria-label="Mobile navigation"
+      >
+        <div className="nav-mobile-inner">
           {NAV_LINKS.map(([label, href]) => (
             <Link key={href} to={href} onClick={() => setOpen(false)}>{label}</Link>
           ))}
           <Link to="/apply" className="btn btn-primary" onClick={() => setOpen(false)}>
             Apply for financing
           </Link>
-        </nav>
-      )}
+        </div>
+      </nav>
     </header>
   );
 }

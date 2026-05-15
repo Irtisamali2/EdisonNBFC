@@ -80,20 +80,40 @@
 .nav-links a:hover { color: var(--brand-700); background: var(--cream-50); }
 .nav-cta { display: flex; gap: 10px; align-items: center; }
 .btn-sm { padding: 10px 16px; font-size: 14px; }
-.nav-burger { display: none; padding: 8px; color: var(--ink-1000); }
+.nav-burger {
+  display: none; padding: 8px; color: var(--ink-1000);
+  transition: transform 200ms var(--ease), opacity 150ms ease;
+}
+.nav-burger-open { transform: rotate(90deg); }
 .nav-mobile { display: none; }
 
 @media (max-width: 960px) {
   .nav-links, .nav-cta { display: none; }
   .nav-burger { display: inline-flex; margin-left: auto; }
+
+  /* Closed: grid row collapses to 0 height */
   .nav-mobile {
+    display: grid;
+    grid-template-rows: 0fr;
+    background: var(--white);
+    border-bottom: 1px solid transparent;
+    transition:
+      grid-template-rows 320ms var(--ease),
+      border-color 260ms ease;
+  }
+  /* Open: row expands to natural content height */
+  .nav-mobile-open {
+    grid-template-rows: 1fr;
+    border-bottom-color: var(--ink-100);
+  }
+  /* Inner wrapper — overflow:hidden is required for 0fr collapse */
+  .nav-mobile-inner {
+    overflow: hidden;
     display: flex; flex-direction: column; gap: 6px;
     padding: 12px var(--gutter) 20px;
-    background: var(--white);
-    border-bottom: 1px solid var(--ink-100);
   }
-  .nav-mobile a { padding: 10px 12px; border-radius: var(--r-md); }
-  .nav-mobile a:hover { background: var(--cream-50); }
+  .nav-mobile a { padding: 10px 12px; border-radius: var(--r-md); color: var(--fg-2); }
+  .nav-mobile a:hover { background: var(--cream-50); color: var(--brand-700); }
 }
 
 /* ---- Hero -------------------------------------------------------- */

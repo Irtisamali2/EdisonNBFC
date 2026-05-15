@@ -229,10 +229,18 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 @keyframes count-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes rise-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page-enter {
+  animation: page-enter 280ms var(--ease) both;
+  will-change: transform, opacity;
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-  .hero-copy, .hero-visual, .product-card, .istat, .focus-card {
+  .hero-copy, .hero-visual, .product-card, .istat, .focus-card, .page-enter {
     animation: none !important; opacity: 1 !important; transform: none !important;
   }
 }

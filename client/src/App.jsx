@@ -17,6 +17,23 @@ function ScrollToTop() {
   return null;
 }
 
+function AnimatedRoutes() {
+  const { pathname } = useLocation();
+  return (
+    <div key={pathname} className="page-enter">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/strategy" element={<StrategyPage />} />
+        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/impact" element={<ImpactPage />} />
+        <Route path="/apply" element={<ApplyPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+      </Routes>
+    </div>
+  );
+}
+
 function Layout() {
   const { pathname } = useLocation();
   return (
@@ -24,15 +41,7 @@ function Layout() {
       <Announcement />
       <TopNav activePath={pathname} />
       <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/strategy" element={<StrategyPage />} />
-          <Route path="/products" element={<ProductsPage />} />
-          <Route path="/impact" element={<ImpactPage />} />
-          <Route path="/apply" element={<ApplyPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-        </Routes>
+        <AnimatedRoutes />
       </main>
       <Footer />
     </>
