@@ -69,9 +69,23 @@ export default function Calculator() {
               </div>
             </div>
             <div className="calc-bar">
-              <div className="calc-bar-p" style={{ flex: amount }}><span>Principal</span><span className="mono">{fmt(amount)}</span></div>
-              <div className="calc-bar-i" style={{ flex: Math.max(profit, total * 0.001) }}>
-                <span>{rate === 0 ? 'No charge' : 'Profit / charge'}</span><span className="mono">{fmt(profit)}</span>
+              <div className="calc-bar-p" style={{ flex: amount }} />
+              <div className="calc-bar-i" style={{ flex: Math.max(profit, total * 0.001) }} />
+            </div>
+            <div className="calc-legend">
+              <div className="calc-legend-item">
+                <span className="calc-legend-dot calc-legend-dot-p" />
+                <div>
+                  <div className="calc-legend-l">Principal</div>
+                  <div className="calc-legend-v mono">{fmt(amount)}</div>
+                </div>
+              </div>
+              <div className="calc-legend-item">
+                <span className="calc-legend-dot calc-legend-dot-i" />
+                <div>
+                  <div className="calc-legend-l">{rate === 0 ? 'No charge' : 'Profit / charge'}</div>
+                  <div className="calc-legend-v mono">{fmt(profit)}</div>
+                </div>
               </div>
             </div>
             <div className="calc-totals">
