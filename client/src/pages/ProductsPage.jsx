@@ -2,7 +2,6 @@ import PageHeader from '../components/layout/PageHeader.jsx';
 import CTASection from '../components/layout/CTASection.jsx';
 import Products from '../components/sections/Products.jsx';
 import Funding from '../components/sections/Funding.jsx';
-import Calculator from '../components/sections/Calculator.jsx';
 
 export default function ProductsPage() {
   return (
@@ -14,7 +13,6 @@ export default function ProductsPage() {
       />
       <Products noHead />
       <Funding />
-      <Calculator />
       <CTASection />
     </>
   );

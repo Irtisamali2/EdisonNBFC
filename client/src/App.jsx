@@ -10,6 +10,7 @@ import ProductsPage from './pages/ProductsPage.jsx';
 import ImpactPage from './pages/ImpactPage.jsx';
 import ApplyPage from './pages/ApplyPage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
+import CalculatorPage from './pages/CalculatorPage.jsx';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -27,6 +28,7 @@ function AnimatedRoutes() {
         <Route path="/strategy" element={<StrategyPage />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/impact" element={<ImpactPage />} />
+        <Route path="/calculator" element={<CalculatorPage />} />
         <Route path="/apply" element={<ApplyPage />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>

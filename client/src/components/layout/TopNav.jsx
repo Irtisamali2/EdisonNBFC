@@ -8,14 +8,14 @@ const NAV_LINKS = [
   ['Strategy', '/strategy'],
   ['Products', '/products'],
   ['Impact', '/impact'],
-  ['Calculator', '/products#calculator'],
+  ['Calculator', '/calculator'],
   ['Contact', '/contact'],
 ];
 
 export default function TopNav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const { pathname, hash } = useLocation();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -34,20 +34,11 @@ export default function TopNav() {
         </Link>
 
         <nav className="nav-links" aria-label="Main navigation">
-          {NAV_LINKS.map(([label, href]) => {
-            const [base, fragment] = href.split('#');
-            let isActive;
-            if (fragment) {
-              isActive = pathname === base && hash === `#${fragment}`;
-            } else {
-              isActive = pathname === base && !hash;
-            }
-            return (
-              <Link key={href} to={href} className={isActive ? 'nav-active' : ''}>
-                {label}
-              </Link>
-            );
-          })}
+          {NAV_LINKS.map(([label, href]) => (
+            <Link key={href} to={href} className={pathname === href ? 'nav-active' : ''}>
+              {label}
+            </Link>
+          ))}
         </nav>
 
         <div className="nav-cta">
