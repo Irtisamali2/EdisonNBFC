@@ -85,32 +85,37 @@
   transition: transform 200ms var(--ease), opacity 150ms ease;
 }
 .nav-burger-open { transform: rotate(90deg); }
+
+/* Desktop: always hidden */
 .nav-mobile { display: none; }
 
 @media (max-width: 960px) {
   .nav-links, .nav-cta { display: none; }
   .nav-burger { display: inline-flex; margin-left: auto; }
 
-  /* Closed: grid row collapses to 0 height */
+  /* Closed state — max-height:0 + no vertical padding so nothing bleeds */
   .nav-mobile {
-    display: grid;
-    grid-template-rows: 0fr;
+    display: flex; flex-direction: column; gap: 6px;
+    overflow: hidden;
     background: var(--white);
     border-bottom: 1px solid transparent;
+    max-height: 0;
+    padding: 0 var(--gutter);
+    opacity: 0;
+    pointer-events: none;
     transition:
-      grid-template-rows 320ms var(--ease),
+      max-height 320ms var(--ease),
+      padding 280ms var(--ease),
+      opacity 220ms ease,
       border-color 260ms ease;
   }
-  /* Open: row expands to natural content height */
+  /* Open state */
   .nav-mobile-open {
-    grid-template-rows: 1fr;
-    border-bottom-color: var(--ink-100);
-  }
-  /* Inner wrapper — overflow:hidden is required for 0fr collapse */
-  .nav-mobile-inner {
-    overflow: hidden;
-    display: flex; flex-direction: column; gap: 6px;
+    max-height: 480px;
     padding: 12px var(--gutter) 20px;
+    opacity: 1;
+    pointer-events: auto;
+    border-bottom-color: var(--ink-100);
   }
   .nav-mobile a { padding: 10px 12px; border-radius: var(--r-md); color: var(--fg-2); }
   .nav-mobile a:hover { background: var(--cream-50); color: var(--brand-700); }

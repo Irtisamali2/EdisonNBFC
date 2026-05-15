@@ -62,14 +62,12 @@ export default function TopNav() {
         aria-hidden={!open}
         aria-label="Mobile navigation"
       >
-        <div className="nav-mobile-inner">
-          {NAV_LINKS.map(([label, href]) => (
-            <Link key={href} to={href} onClick={() => setOpen(false)}>{label}</Link>
-          ))}
-          <Link to="/apply" className="btn btn-primary" onClick={() => setOpen(false)}>
-            Apply for financing
-          </Link>
-        </div>
+        {NAV_LINKS.map(([label, href]) => (
+          <Link key={href} to={href} onClick={() => setOpen(false)}>{label}</Link>
+        ))}
+        <Link to="/apply" className="btn btn-primary" onClick={() => setOpen(false)}>
+          Apply for financing
+        </Link>
       </nav>
     </header>
   );

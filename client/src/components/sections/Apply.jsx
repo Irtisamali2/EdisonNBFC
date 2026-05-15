@@ -2,8 +2,17 @@ import { useState } from 'react';
 import axios from 'axios';
 import Icon from '../common/Icon.jsx';
 
-function Field({ label, children }) {
-  return <label className="field"><span className="field-l">{label}</span>{children}</label>;
+const CNIC_RE  = /^\d{5}-\d{7}-\d$/;
+const PHONE_RE = /^03\d{2}[\s-]?\d{7}$/;
+
+function Field({ label, error, children }) {
+  return (
+    <label className={`field${error ? ' field-error' : ''}`}>
+      <span className="field-l">{label}</span>
+      {children}
+      {error && <span className="field-err-msg">{error}</span>}
+    </label>
+  );
 }
 function ReviewRow({ l, v }) {
   return <div className="review-row"><span>{l}</span><span>{v}</span></div>;
@@ -16,29 +25,64 @@ const INITIAL = {
   sector: '', monthlyIncome: '', employment: 'self', consent: false,
 };
 
-export default function Apply({ noHead = false }) {
-  const [step, setStep] = useState(0);
-  const [data, setData] = useState(INITIAL);
-  const [submitting, setSubmitting] = useState(false);
-  const [refId, setRefId] = useState('');
+function validate(step, data) {
+  const e = {};
+  if (step === 0) {
+    if (!data.name.trim() || data.name.trim().length < 3)
+      e.name = 'Full name is required (min 3 characters).';
+    if (!CNIC_RE.test(data.cnic))
+      e.cnic = 'Enter a valid CNIC — format 35202-1234567-8.';
+    if (!PHONE_RE.test(data.phone.replace(/\s/g, '')))
+      e.phone = 'Enter a valid Pakistani mobile number (e.g. 0300 1234567).';
+    if (!data.city)
+      e.city = 'Please select your city.';
+  }
+  if (step === 2) {
+    if (!data.sector)
+      e.sector = 'Please select your sector.';
+    const inc = parseFloat(String(data.monthlyIncome).replace(/,/g, ''));
+    if (!data.monthlyIncome || isNaN(inc) || inc <= 0)
+      e.monthlyIncome = 'Enter your monthly income (numbers only).';
+    if (!data.purpose.trim() || data.purpose.trim().length < 10)
+      e.purpose = 'Briefly describe your purpose (min 10 characters).';
+  }
+  return e;
+}
 
-  const set = (k, v) => setData(d => ({ ...d, [k]: v }));
-  const TOTAL = 4;
-  const next = () => setStep(s => Math.min(TOTAL, s + 1));
-  const back = () => setStep(s => Math.max(0, s - 1));
+export default function Apply({ noHead = false }) {
+  const [step, setStep]         = useState(0);
+  const [data, setData]         = useState(INITIAL);
+  const [errors, setErrors]     = useState({});
+  const [submitting, setSubmitting] = useState(false);
+  const [refId, setRefId]       = useState('');
+
+  const set = (k, v) => {
+    setData(d => ({ ...d, [k]: v }));
+    if (errors[k]) setErrors(e => { const n = { ...e }; delete n[k]; return n; });
+  };
+
+  const TOTAL  = 4;
   const LABELS = ['Borrower', 'Product', 'Capacity', 'Review'];
 
+  const next = () => {
+    const errs = validate(step, data);
+    if (Object.keys(errs).length) { setErrors(errs); return; }
+    setErrors({});
+    setStep(s => Math.min(TOTAL, s + 1));
+  };
+  const back = () => { setErrors({}); setStep(s => Math.max(0, s - 1)); };
+
   const submit = async () => {
+    if (!data.consent) return;
     setSubmitting(true);
     try {
       const res = await axios.post('/api/applications', data);
       setRefId(res.data.refId || 'EDF-' + Math.random().toString(36).slice(2, 8).toUpperCase());
-      setStep(TOTAL);
     } catch {
       setRefId('EDF-' + Math.random().toString(36).slice(2, 8).toUpperCase());
-      setStep(TOTAL);
     } finally {
       setSubmitting(false);
+      setStep(TOTAL);
     }
   };
 
@@ -79,12 +123,18 @@ export default function Apply({ noHead = false }) {
             {step === 0 && (
               <div className="apply-step">
                 <h3>Tell us about you</h3>
-                <Field label="Full name (as per CNIC)"><input value={data.name} onChange={e => set('name', e.target.value)} placeholder="Ahmed Hussain" /></Field>
+                <Field label="Full name (as per CNIC)" error={errors.name}>
+                  <input value={data.name} onChange={e => set('name', e.target.value)} placeholder="Ahmed Hussain" />
+                </Field>
                 <div className="row-2">
-                  <Field label="CNIC"><input value={data.cnic} onChange={e => set('cnic', e.target.value)} placeholder="35202-0000000-0" /></Field>
-                  <Field label="Mobile"><input value={data.phone} onChange={e => set('phone', e.target.value)} placeholder="0300 0000000" /></Field>
+                  <Field label="CNIC" error={errors.cnic}>
+                    <input value={data.cnic} onChange={e => set('cnic', e.target.value)} placeholder="35202-0000000-0" maxLength={15} />
+                  </Field>
+                  <Field label="Mobile" error={errors.phone}>
+                    <input value={data.phone} onChange={e => set('phone', e.target.value)} placeholder="0300 0000000" maxLength={12} />
+                  </Field>
                 </div>
-                <Field label="City">
+                <Field label="City" error={errors.city}>
                   <select value={data.city} onChange={e => set('city', e.target.value)}>
                     <option value="">Select city</option>
                     {['Islamabad','Rawalpindi','Lahore','Faisalabad','Multan','Peshawar','Karachi','Quetta'].map(c => <option key={c}>{c}</option>)}
@@ -121,14 +171,16 @@ export default function Apply({ noHead = false }) {
             {step === 2 && (
               <div className="apply-step">
                 <h3>Repayment capacity</h3>
-                <Field label="Sector">
+                <Field label="Sector" error={errors.sector}>
                   <select value={data.sector} onChange={e => set('sector', e.target.value)}>
                     <option value="">Select sector</option>
                     {['Retail / shopkeeping','Tailoring / handicrafts','Agriculture / livestock','Transport / EV bike','Services','Education / Hazza graduate','Other'].map(s => <option key={s}>{s}</option>)}
                   </select>
                 </Field>
                 <div className="row-2">
-                  <Field label="Monthly income (PKR)"><input value={data.monthlyIncome} onChange={e => set('monthlyIncome', e.target.value)} placeholder="35,000" /></Field>
+                  <Field label="Monthly income (PKR)" error={errors.monthlyIncome}>
+                    <input value={data.monthlyIncome} onChange={e => set('monthlyIncome', e.target.value)} placeholder="35,000" />
+                  </Field>
                   <Field label="Employment">
                     <select value={data.employment} onChange={e => set('employment', e.target.value)}>
                       <option value="self">Self-employed</option>
@@ -138,7 +190,7 @@ export default function Apply({ noHead = false }) {
                     </select>
                   </Field>
                 </div>
-                <Field label="Purpose of financing">
+                <Field label="Purpose of financing" error={errors.purpose}>
                   <textarea rows="3" value={data.purpose} onChange={e => set('purpose', e.target.value)} placeholder="e.g. Purchase of stock for kiryana store; expanding tailoring unit; EV bike for delivery" />
                 </Field>
               </div>
@@ -148,24 +200,25 @@ export default function Apply({ noHead = false }) {
               <div className="apply-step">
                 <h3>Review &amp; submit</h3>
                 <div className="review">
-                  <ReviewRow l="Name" v={data.name || '—'} />
-                  <ReviewRow l="CNIC" v={data.cnic || '—'} />
-                  <ReviewRow l="Mobile" v={data.phone || '—'} />
-                  <ReviewRow l="City" v={data.city || '—'} />
+                  <ReviewRow l="Name"   v={data.name} />
+                  <ReviewRow l="CNIC"   v={data.cnic} />
+                  <ReviewRow l="Mobile" v={data.phone} />
+                  <ReviewRow l="City"   v={data.city} />
                   <hr />
-                  <ReviewRow l="Mode" v={data.productMode === 'shariah' ? 'Shariah-compliant' : 'Conventional'} />
+                  <ReviewRow l="Mode"    v={data.productMode === 'shariah' ? 'Shariah-compliant' : 'Conventional'} />
                   <ReviewRow l="Product" v={data.productType} />
-                  <ReviewRow l="Amount" v={`PKR ${(+data.amount).toLocaleString('en-IN')}`} />
-                  <ReviewRow l="Tenor" v={`${data.tenor} months`} />
+                  <ReviewRow l="Amount"  v={`PKR ${(+data.amount).toLocaleString('en-IN')}`} />
+                  <ReviewRow l="Tenor"   v={`${data.tenor} months`} />
                   <hr />
-                  <ReviewRow l="Sector" v={data.sector || '—'} />
-                  <ReviewRow l="Monthly income" v={data.monthlyIncome ? `PKR ${data.monthlyIncome}` : '—'} />
-                  <ReviewRow l="Employment" v={data.employment} />
+                  <ReviewRow l="Sector"         v={data.sector} />
+                  <ReviewRow l="Monthly income" v={`PKR ${data.monthlyIncome}`} />
+                  <ReviewRow l="Employment"     v={data.employment} />
                 </div>
                 <label className="consent">
                   <input type="checkbox" checked={data.consent} onChange={e => set('consent', e.target.checked)} />
                   <span>I consent to credit verification and to be contacted by Edison Finance regarding this application.</span>
                 </label>
+                {!data.consent && <p className="field-err-msg" style={{ marginTop: 8 }}>You must accept the consent to submit.</p>}
               </div>
             )}
 
@@ -173,7 +226,7 @@ export default function Apply({ noHead = false }) {
               <div className="apply-step apply-done">
                 <div className="done-badge"><Icon name="check" size={28} /></div>
                 <h3>Application received</h3>
-                <p>Thank you, {data.name || 'Applicant'}. A reference ID will be sent to {data.phone || 'your mobile'} once Edison Finance receives its NBFC license.</p>
+                <p>Thank you, {data.name}. A reference ID will be sent to {data.phone} once Edison Finance receives its NBFC license.</p>
                 <div className="mono done-ref">REF · {refId}</div>
               </div>
             )}
@@ -187,7 +240,7 @@ export default function Apply({ noHead = false }) {
                   {submitting ? 'Submitting…' : 'Submit application'} <Icon name="arrow-right" size={16} />
                 </button>
               )}
-              {step === TOTAL && <button className="btn btn-secondary" onClick={() => { setStep(0); setData(INITIAL); }}>Start another</button>}
+              {step === TOTAL && <button className="btn btn-secondary" onClick={() => { setStep(0); setData(INITIAL); setErrors({}); }}>Start another</button>}
             </div>
           </div>
         </div>

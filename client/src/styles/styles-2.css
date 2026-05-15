@@ -225,6 +225,9 @@ input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border-radius
 .field input[type="range"] { padding: 0; border: none; background: var(--cream-200); }
 .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--brand-500); outline: none; }
 .field textarea { resize: vertical; min-height: 80px; }
+.field-error .field-l { color: var(--error, #c0392b); }
+.field-error input, .field-error select, .field-error textarea { border-color: var(--error, #c0392b) !important; }
+.field-err-msg { font-size: 12px; color: var(--error, #c0392b); font-weight: 500; margin-top: -2px; }
 .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .apply-mode { display: inline-flex; padding: 6px; background: var(--cream-100); border-radius: var(--r-pill); gap: 4px; margin-bottom: 20px; }
 .apply-mode-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: var(--r-pill); font-size: 14px; font-weight: 600; color: var(--fg-3); }
